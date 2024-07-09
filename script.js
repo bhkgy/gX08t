@@ -10,7 +10,7 @@ let food = {
     y: Math.floor(Math.random() * canvasSize / box) * box,
 };
 const appleImage = new Image();
-appleImage.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABhElEQVR42q2SMU/TUBCG/7n5gtRQpKRhLoZKSkhShEKVbBRG2WSbSjkHjwGl7Gxotugow8ldY3oYiSwU6WeRDaiA0UjR06GgTTovLBV1DUrb1bbpfXs0EN7nd8/j8zv3vff7QxtMOve2EYAxyKcX/ulSTydhZxAvROAioLRb5T8rwUBiAIAZVQwrgx8WI8HyCPw1b3WiKyNqkRcuIr1VJWpN5ELrdvI1prcKKRtQiKpEDACs5QwE0AMMn3H3a4k+E1+KbQWsZbuNRXKNNp8IEuEn0zi0XmvszbI2tsJrL7S20TiHpBSPYZDOjgzj2EnqsRYagZFtBbBsg4fKOIQqO53B0Hk8PzhjLpqBf9ONuYWhBvlZ1yYhsc+J/yb1/g82YJfH9A5Q0P1L8u+kBO2e0NiyLkMN2q7SoLDp77G19K+pgeBAk/gCyfaOcsPVZOV9AMAzXzIKrAwCvj+yxpaeVpqd0KgJpRQm2K0RCPTXsl9tfDkJS4ocJH1omLO+5qRwvHJ+UQ4gWhl/UfYX6YnddBBHkmNYAAAAASUVORK5CYII=';
+appleImage.src = 'apple.png'; // ローカルのapple.png画像を使用
 
 document.addEventListener("keydown", setDirection);
 
