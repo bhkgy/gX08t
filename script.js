@@ -9,6 +9,8 @@ let food = {
     x: Math.floor(Math.random() * canvasSize / box) * box,
     y: Math.floor(Math.random() * canvasSize / box) * box,
 };
+const appleImage = new Image();
+appleImage.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABhElEQVR42q2SMU/TUBCG/7n5gtRQpKRhLoZKSkhShEKVbBRG2WSbSjkHjwGl7Gxotugow8ldY3oYiSwU6WeRDaiA0UjR06GgTTovLBV1DUrb1bbpfXs0EN7nd8/j8zv3vff7QxtMOve2EYAxyKcX/ulSTydhZxAvROAioLRb5T8rwUBiAIAZVQwrgx8WI8HyCPw1b3WiKyNqkRcuIr1VJWpN5ELrdvI1prcKKRtQiKpEDACs5QwE0AMMn3H3a4k+E1+KbQWsZbuNRXKNNp8IEuEn0zi0XmvszbI2tsJrL7S20TiHpBSPYZDOjgzj2EnqsRYagZFtBbBsg4fKOIQqO53B0Hk8PzhjLpqBf9ONuYWhBvlZ1yYhsc+J/yb1/g82YJfH9A5Q0P1L8u+kBO2e0NiyLkMN2q7SoLDp77G19K+pgeBAk/gCyfaOcsPVZOV9AMAzXzIKrAwCvj+yxpaeVpqd0KgJpRQm2K0RCPTXsl9tfDkJS4ocJH1omLO+5qRwvHJ+UQ4gWhl/UfYX6YnddBBHkmNYAAAAASUVORK5CYII=';
 
 document.addEventListener("keydown", setDirection);
 
@@ -27,10 +29,16 @@ function drawGame() {
         ctx.fillRect(snake[i].x, snake[i].y, box, box);
         ctx.strokeStyle = "red";
         ctx.strokeRect(snake[i].x, snake[i].y, box, box);
+
+        if (i === 0) {
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.arc(snake[i].x + box / 2, snake[i].y + box / 2, box / 4, 0, 2 * Math.PI);
+            ctx.fill();
+        }
     }
 
-    ctx.fillStyle = "red";
-    ctx.fillRect(food.x, food.y, box, box);
+    ctx.drawImage(appleImage, food.x, food.y, box, box);
 
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
@@ -68,4 +76,4 @@ function collision(head, array) {
     return false;
 }
 
-let game = setInterval(drawGame, 100);
+let game = setInterval(drawGame, 200);
