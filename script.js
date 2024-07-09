@@ -6,8 +6,8 @@ const canvasSize = canvas.width;
 let snake = [{ x: 9 * box, y: 10 * box }];
 let direction = "RIGHT";
 let food = {
-    x: Math.floor(Math.random() * (canvasSize/box)) * box,
-    y: Math.floor(Math.random() * (canvasSize/box)) * box
+    x: Math.floor(Math.random() * (canvasSize / box)) * box,
+    y: Math.floor(Math.random() * (canvasSize / box)) * box
 };
 
 document.addEventListener("keydown", directionControl);
@@ -24,17 +24,29 @@ function directionControl(event) {
     }
 }
 
+function drawGrid() {
+    for (let i = 0; i < canvasSize; i += box) {
+        ctx.moveTo(i, 0);
+        ctx.lineTo(i, canvasSize);
+        ctx.moveTo(0, i);
+        ctx.lineTo(canvasSize, i);
+    }
+    ctx.strokeStyle = "#ddd";
+    ctx.stroke();
+}
+
 function collision(newHead, snake) {
     for (let i = 0; i < snake.length; i++) {
         if (newHead.x == snake[i].x && newHead.y == snake[i].y) {
             return true;
         }
     }
-    return newHead.x >= canvasSize || newHead.x < 0 || newHead.y >= canvasSize || newHead.y < 0;
+    return false;
 }
 
 function draw() {
     ctx.clearRect(0, 0, canvasSize, canvasSize);
+    drawGrid();
 
     for (let i = 0; i < snake.length; i++) {
         ctx.fillStyle = (i === 0) ? 'darkgreen' : 'lightgreen';
@@ -42,8 +54,8 @@ function draw() {
 
         if (i === 0) {
             ctx.fillStyle = 'black';
-            ctx.fillRect(snake[i].x + 4, snake[i].y + 4, 4, 4); // Left eye
-            ctx.fillRect(snake[i].x + 12, snake[i].y + 4, 4, 4); // Right eye
+            ctx.fillRect(snake[i].x + 4, snake[i].y + 4, 4, 4); // 左目
+            ctx.fillRect(snake[i].x + 12, snake[i].y + 4, 4, 4); // 右目
         }
     }
 
@@ -77,6 +89,11 @@ function draw() {
         clearInterval(game);
         alert('ゲームオーバー');
     }
+
+    if (newHead.x >= canvasSize) newHead.x = 0;
+    if (newHead.x < 0) newHead.x = canvasSize - box;
+    if (newHead.y >= canvasSize) newHead.y = 0;
+    if (newHead.y < 0) newHead.y = canvasSize - box;
 
     snake.unshift(newHead);
 }
